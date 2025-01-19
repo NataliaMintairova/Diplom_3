@@ -3,6 +3,8 @@ package pageobject;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AccountProfilePage {
     private WebDriver driver;
@@ -41,5 +43,10 @@ public class AccountProfilePage {
     public void clickLogo(){
         driver.findElement(logo).isEnabled();
         driver.findElement(logo).click();
+    }
+
+    @Step("wait Loading Profile Page")
+    public void waitLoadingProfilePage(){
+        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(profileButton));
     }
 }

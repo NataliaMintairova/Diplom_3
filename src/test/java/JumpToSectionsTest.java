@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -10,6 +12,8 @@ import static org.junit.Assert.assertEquals;
 public class JumpToSectionsTest extends BaseClassTest{
 
     @Test
+    @DisplayName("jump To Section Sauces")
+    @Description("Проверка работы перехода к разделу «Соусы»")
     public void jumpToSectionSauces(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickSaucesButton();
@@ -17,6 +21,8 @@ public class JumpToSectionsTest extends BaseClassTest{
     }
 
     @Test
+    @DisplayName("jump To Section Fillings")
+    @Description("Проверка работы перехода к разделу «Начинки»")
     public void jumpToSectionFillings(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickFillingsButton();
@@ -24,6 +30,8 @@ public class JumpToSectionsTest extends BaseClassTest{
     }
 
     @Test
+    @DisplayName("jump To Section Buns")
+    @Description("Проверка работы перехода к разделу «Булки»")
     public void jumpToSectionBuns(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickSaucesButton();

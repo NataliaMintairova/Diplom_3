@@ -1,4 +1,6 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.example.UserApi;
@@ -28,26 +30,32 @@ public class LoginTest extends BaseClassTest {
     }
 
     @Test
+    @DisplayName("login With Login Account Button Test")
+    @Description("Проверка входа по кнопке «Войти в аккаунт» на главной странице")
     public void loginWithLoginAccountButtonTest(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickLoginAccountButton();
         LoginPage objLoginPage = new LoginPage(driver);
         objLoginPage.setInputData(random + "@ya.ru", random);
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[contains(text(),'Оформить заказ')]")));
+        objMainPage.waitAuthorization();
         Assert.assertTrue(objMainPage.isCreateOrderButtonVisible());
     }
 
     @Test
+    @DisplayName("login With Personal Account Button Test")
+    @Description("Проверка входа через кнопку «Личный кабинет»")
     public void loginWithPersonalAccountButtonTest(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickPersonalAccountButton();
         LoginPage objLoginPage = new LoginPage(driver);
         objLoginPage.setInputData(random + "@ya.ru", random);
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[contains(text(),'Оформить заказ')]")));
+        objMainPage.waitAuthorization();
         Assert.assertTrue(objMainPage.isCreateOrderButtonVisible());
     }
 
     @Test
+    @DisplayName("login With Registration Form Login Button Test")
+    @Description("Проверка входа через кнопку в форме регистрации")
     public void loginWithRegistrationFormLoginButtonTest(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickPersonalAccountButton();
@@ -56,11 +64,13 @@ public class LoginTest extends BaseClassTest {
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
         objAuthorizationPage.clickLoginButton();
         objLoginPage.setInputData(random + "@ya.ru", random);
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[contains(text(),'Оформить заказ')]")));
+        objMainPage.waitAuthorization();
         Assert.assertTrue(objMainPage.isCreateOrderButtonVisible());
     }
 
     @Test
+    @DisplayName("login With Password Recovery Button Test")
+    @Description("Проверка входа через кнопку в форме восстановления пароля")
     public void loginWithPasswordRecoveryButtonTest(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickPersonalAccountButton();
@@ -69,7 +79,7 @@ public class LoginTest extends BaseClassTest {
         ForgotPasswordPage objForgotPasswordPage = new ForgotPasswordPage(driver);
         objForgotPasswordPage.clickLoginButton();
         objLoginPage.setInputData(random + "@ya.ru", random);
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[contains(text(),'Оформить заказ')]")));
+        objMainPage.waitAuthorization();
         Assert.assertTrue(objMainPage.isCreateOrderButtonVisible());
     }
 }

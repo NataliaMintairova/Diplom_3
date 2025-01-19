@@ -1,4 +1,6 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.example.UserApi;
@@ -32,42 +34,50 @@ public class FollowsTest extends BaseClassTest{
     }
 
     @Test
+    @DisplayName("follow Personal Account Button Test")
+    @Description("проверка перехода по клику на «Личный кабинет»")
     public void followPersonalAccountButtonTest() {
     MainPage objMainPage = new MainPage(driver);
     objMainPage.clickPersonalAccountButton();
     AccountProfilePage objAccountProfilePage = new AccountProfilePage(driver);
-    new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//a[contains(text(),'Профиль')]")));
+    objAccountProfilePage.waitLoadingProfilePage();
     Assert.assertTrue(objAccountProfilePage.checkLoadingProfilePage());
     }
 
     @Test
+    @DisplayName("follow Constructor Button Test")
+    @Description("Проверка перехода по клику на «Конструктор»")
     public void followConstructorButtonTest(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickPersonalAccountButton();
         AccountProfilePage objAccountProfilePage = new AccountProfilePage(driver);
         objAccountProfilePage.clickConstructorButton();
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//h1[contains(text(),'Соберите бургер')]")));
+        objMainPage.waitLoadingMainPage();
         Assert.assertTrue(objMainPage.isInscriptionCollectBurgerVisible());
     }
 
     @Test
+    @DisplayName("follow Logo Test")
+    @Description("Проверка перехода по клику на логотип")
     public void followLogoTest(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickPersonalAccountButton();
         AccountProfilePage objAccountProfilePage = new AccountProfilePage(driver);
         objAccountProfilePage.clickLogo();
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//h1[contains(text(),'Соберите бургер')]")));
+        objMainPage.waitLoadingMainPage();
         Assert.assertTrue(objMainPage.isInscriptionCollectBurgerVisible());
     }
 
     @Test
+    @DisplayName("follow Exit Button Test")
+    @Description("Проверка выхода по кнопке «Выйти» в личном кабинете")
     public void followExitButtonTest(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.clickPersonalAccountButton();
         AccountProfilePage objAccountProfilePage = new AccountProfilePage(driver);
         objAccountProfilePage.clickExitButton();
         LoginPage objLoginPage = new LoginPage(driver);
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//main/div/h2")));
+        objLoginPage.waitLoadingLoginPage();
         Assert.assertTrue(objLoginPage.checkLoadingLoginPage());
     }
 }

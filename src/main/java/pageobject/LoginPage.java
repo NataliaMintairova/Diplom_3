@@ -3,6 +3,8 @@ package pageobject;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
     private WebDriver driver;
@@ -64,4 +66,8 @@ public class LoginPage {
         driver.findElement(passwordRecoveryButton).click();
     }
 
+    @Step("wait Loading Login Page")
+    public void waitLoadingLoginPage(){
+        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(inscriptionLogin));
+    }
 }

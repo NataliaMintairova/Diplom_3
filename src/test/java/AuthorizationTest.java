@@ -1,4 +1,6 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.example.UserApi;
@@ -35,15 +37,19 @@ public class AuthorizationTest extends BaseClassTest {
     }
 
     @Test
+    @DisplayName("check Successful Registration Test")
+    @Description("Проверка успешной регистрации")
     public void checkSuccessfulRegistrationTest(){
         LoginPage objLoginPage = new LoginPage(driver);
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
         objAuthorizationPage.setInputData(random,random + "@ya.ru", random);
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//main/div/h2")));
+        objLoginPage.waitLoadingLoginPage();
         Assert.assertTrue(objLoginPage.checkLoadingLoginPage());
     }
 
     @Test
+    @DisplayName("check Bad Password Error Registration Test")
+    @Description("вывод ошибки для некорректного пароля")
     public void checkBadPasswordErrorRegistrationTest(){
         AuthorizationPage objAuthorizationPage = new AuthorizationPage(driver);
         objAuthorizationPage.setInputData(random,random + "@ya.ru", random1);
