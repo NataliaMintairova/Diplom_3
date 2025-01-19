@@ -20,7 +20,7 @@ public class LoginTest extends BaseClassTest {
     UserData user;
     @Before
     @Step("set Up")
-    public void setUp(){
+    public void settUp(){
         RestAssured.baseURI = URL_MAIN_PAGE;
         userApi = new UserApi();
         user = new UserData(random + "@ya.ru", random, random);
